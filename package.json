@@ -1,6 +1,6 @@
 {
   "name": "ai-horde",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -8,9 +8,18 @@
     "prepublishOnly": "rm -rf dist && pnpm tsc",
     "build": "pnpm tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "kobold",
+    "horde",
+    "http",
+    "ai"
+  ],
   "author": "Seikho",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seikho/ai-horde.git"
+  },
   "dependencies": {
     "@types/needle": "^3.2.0",
     "needle": "^3.2.0"
