@@ -1,6 +1,6 @@
 # ai-horde
 
-> Stable Horde and Kobold Horde request library
+> Stable Horde request library
 
 ## Work in progress
 
@@ -15,9 +15,9 @@
 ```
 
 ```ts
-import * as ai from 'ai-horde'
+import * as horde from 'ai-horde'
 
-const user = await ai.findUser('some-api-key')
+const user = await horde.findUser('some-api-key')
 ```
 
 ## API
@@ -27,12 +27,7 @@ const user = await ai.findUser('some-api-key')
 Dispatch an asynchronous text generation request
 
 ```ts
-// Return: P
-function generate(
-  type: 'horde' | 'kobold',
-  request: GenerateRequest,
-  apikey?: string
-): Promise<{ id: string }>
+function generate(request: GenerateRequest, apikey?: string): Promise<{ id: string }>
 
 type GenerateRequest = {
   prompt: string
@@ -71,18 +66,15 @@ Wait for a text generation response
 Example:
 
 ```ts
-const { id } = await generate('horde', params, apikey)
-const response = await waitForResposne('horde', id)
+const models = await horde.getModels('text')
+const { id } = await horde.generate(params, apikey)
+const response = await horde.waitForResponse(id)
 
 return response.generations
 ```
 
 ```ts
-function waitForResponse(
-  type: 'horde' | 'kobold',
-  id: string,
-  timeoutSecs?: number
-): Promise<StatusResponse>
+function waitForResponse(id: string, timeoutSecs?: number): Promise<StatusResponse>
 
 type StatusResponse = {
   finished: number
@@ -108,13 +100,10 @@ type StatusResponse = {
 
 ### findUser
 
-Retrieve user information. If `type` is not provided, both Horde APIs will be queried and the valid response will be returned.
-
 ```ts
-function findUser(apikey: string, type?: 'horde' | 'kobold'): Promise<FindUserResponse>
+function findUser(apikey: string): Promise<FindUserResponse>
 
 type FindUserResponse = {
-  type: 'horde' | 'kobold'
   kudos_details: {
     accumulated: number
     gifted: number

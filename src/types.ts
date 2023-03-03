@@ -1,5 +1,3 @@
-export type ApiType = 'horde' | 'kobold'
-
 export type GenerateRequest = {
   prompt: string
   params: {
@@ -76,4 +74,13 @@ export type StatusResponse = {
     text: string
     seed: number
   }>
+}
+
+export type Model = {
+  name: string
+  count: number
+  performance: number
+  queued: number
+  eta: number
+  type?: string
 }
